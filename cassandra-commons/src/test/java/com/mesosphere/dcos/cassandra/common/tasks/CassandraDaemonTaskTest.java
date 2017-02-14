@@ -51,6 +51,8 @@ public class CassandraDaemonTaskTest {
                 "java-home",
                 new URI("http://jre-location"),
                 new URI("http://executor-location"),
+                new URI("http://splunk-location"),
+                new URI("http://splunsh-location"),
                 new URI("http://cassandra-location"),
                 new URI("http://libmesos-location"),
                 false);
@@ -205,6 +207,8 @@ public class CassandraDaemonTaskTest {
                 "java-home",
                 new URI("http://jre-location"),
                 new URI("http://executor-location"),
+                new URI("http://splunk-location"),
+                new URI("http://splunsh-location"),
                 new URI("http://cassandra-location-updated"),
                 new URI("http://libmesos-location"),
                 false);
@@ -221,7 +225,7 @@ public class CassandraDaemonTaskTest {
                 updatedTestExecutorConfig,
                 TEST_CONFIG_ID);
         Assert.assertNotEquals(normalizeCassandraTaskInfo(daemonTask), normalizeCassandraTaskInfo(updatedTask));
-        Assert.assertEquals(4, updatedTask.getExecutor().getURIs().size());
+        Assert.assertEquals(6, updatedTask.getExecutor().getURIs().size());
         Assert.assertTrue(updatedTask.getExecutor().getURIs().contains("http://cassandra-location-updated"));
     }
 
@@ -277,6 +281,8 @@ public class CassandraDaemonTaskTest {
                 "java-home",
                 new URI("http://jre-location"),
                 new URI("http://executor-location"),
+                new URI("http://splunk-location"),
+                new URI("http://splunsh-location"),
                 new URI("http://cassandra-location"),
                 new URI("http://libmesos-location"),
                 /* cacheFetchedUris */ true);
@@ -314,6 +320,8 @@ public class CassandraDaemonTaskTest {
                 "java-home",
                 "http://jre-location",
                 "http://executor-location",
+                "http://splunk-location",
+                "http://splunsh-location",
                 "http://cassandra-location",
                 /* libmesosLocation */ null,
                 false,
@@ -331,7 +339,7 @@ public class CassandraDaemonTaskTest {
                 TEST_CONFIG_NAME,
                 testTaskExecutor,
                 CassandraConfig.DEFAULT);
-        Assert.assertEquals(4, daemonTask.getExecutor().getURIs().size());
+        Assert.assertEquals(6, daemonTask.getExecutor().getURIs().size());
         Assert.assertTrue(daemonTask.getExecutor().getURIs().contains(DEFAULT_LIBMESOS_LOCATION));
 
         ExecutorConfig updatedTestExecutorConfig = ExecutorConfig.create(
@@ -344,6 +352,8 @@ public class CassandraDaemonTaskTest {
                 "java-home",
                 "http://jre-location",
                 "http://executor-location",
+                "http://splunk-location",
+                "http://splunsh-location",
                 "http://cassandra-location",
                 "http://libmesos-location-new",
                 false,

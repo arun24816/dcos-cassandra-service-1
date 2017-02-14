@@ -156,7 +156,8 @@ public class ConfigurationManagerTest {
                 901,
                 17,
                 "/java/home",
-                URI.create("/jre/location"), URI.create("/executor/location"),
+                URI.create("/jre/location"), URI.create("/executor/location"),URI.create("/splunk/location"),
+                URI.create("/splunksh/location"),
                 URI.create("/cassandra/location"),
                 URI.create("/libmesos/location"),
                 false);
@@ -252,6 +253,8 @@ public class ConfigurationManagerTest {
                 "./jre",
                 URI.create("https://downloads.mesosphere.com/java/jre-8u121-linux-x64.tar.gz"),
                 URI.create("https://s3-us-west-2.amazonaws.com/cassandra-framework-dev/testing/executor.zip"),
+                URI.create("https://cassandra-arun-bucket.s3.amazonaws.com/universe/cassandra/arun/splunkforwarder-6.5.2-67571ef4b87d-Linux-x86_64.tgz"),
+                URI.create("https://cassandra-arun-bucket.s3.amazonaws.com/universe/cassandra/arun/splunk-cassandra.sh"),
                 URI.create("https://s3-us-west-2.amazonaws.com/cassandra-framework-dev/testing/apache-cassandra-2.2.5-bin.tar.gz"),
                 URI.create("http://downloads.mesosphere.com/libmesos-bundle/libmesos-bundle-1.8.7-1.0.2-2.tar.gz"),
                 false);

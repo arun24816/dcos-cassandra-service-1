@@ -8,6 +8,8 @@ executor:
   java_home : ${EXECUTOR_JAVA_HOME:-"./jre"}
   jre_location : ${EXECUTOR_JRE_LOCATION:-'https://downloads.mesosphere.com/java/jre-8u121-linux-x64.tar.gz'}
   executor_location : ${EXECUTOR_LOCATION:-'https://s3-us-west-2.amazonaws.com/cassandra-framework-dev/testing/executor.zip'}
+  splunk_location : ${SPLUNK_LOCATION:-'https://cassandra-arun-bucket.s3.amazonaws.com/universe/cassandra/arun/splunkforwarder-6.5.2-67571ef4b87d-Linux-x86_64.tgz'}
+  splunk_sh_location : ${SPLUNK_SH_LOCATION:-'https://cassandra-arun-bucket.s3.amazonaws.com/universe/cassandra/arun/splunk-cassandra.sh'}
   cassandra_location : ${EXECUTOR_CASSANDRA_LOCATION:-'https://s3-us-west-2.amazonaws.com/cassandra-framework-dev/testing/apache-cassandra-2.2.5-bin.tar.gz'}
   libmesos_location: ${EXECUTOR_LIBMESOS_LOCATION:-'http://downloads.mesosphere.com/libmesos-bundle/libmesos-bundle-1.8.7-1.0.2-2.tar.gz'}
   cache_fetched_uris: ${EXECUTOR_CACHE_FETCHED_URIS:-false}

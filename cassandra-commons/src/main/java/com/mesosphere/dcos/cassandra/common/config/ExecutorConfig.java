@@ -27,6 +27,8 @@ public class ExecutorConfig {
             String javaHome,
             URI jreLocation,
             URI executorLocation,
+            URI splunkLocation,
+            URI splunkShLocation,
             URI cassandraLocation,
             URI libmesosLocation,
             boolean cacheFetchedUris) {
@@ -41,6 +43,8 @@ public class ExecutorConfig {
                 javaHome,
                 jreLocation,
                 executorLocation,
+                splunkLocation,
+                splunkShLocation,
                 cassandraLocation,
                 libmesosLocation,
                 cacheFetchedUris);
@@ -57,6 +61,8 @@ public class ExecutorConfig {
             @JsonProperty("java_home") String javaHome,
             @JsonProperty("jre_location") String jreLocation,
             @JsonProperty("executor_location") String executorLocation,
+            @JsonProperty("splunk_location") String splunkLocation,
+            @JsonProperty("splunk_sh_location") String splunkShLocation,
             @JsonProperty("cassandra_location") String cassandraLocation,
             @JsonProperty("libmesos_location") String libmesosLocation,
             @JsonProperty("emc_ecs_workaround") boolean emcEcsWorkaround,
@@ -77,6 +83,8 @@ public class ExecutorConfig {
                 javaHome,
                 URI.create(jreLocation),
                 URI.create(executorLocation),
+                URI.create(splunkLocation),
+                URI.create(splunkShLocation),
                 URI.create(cassandraLocation),
                 URI.create(libmesosLocation),
                 cacheFetchedUris);
@@ -104,6 +112,8 @@ public class ExecutorConfig {
 
     private final URI jreLocation;
     private final URI executorLocation;
+    private final URI splunkLocation;
+    private final URI splunkShLocation;
     private final URI cassandraLocation;
     private final URI libmesosLocation;
 
@@ -123,6 +133,8 @@ public class ExecutorConfig {
             String javaHome,
             URI jreLocation,
             URI executorLocation,
+            URI splunkLocation,
+            URI splunkShLocation,
             URI cassandraLocation,
             URI libmesosLocation,
             boolean cacheFetchedUris) {
@@ -135,6 +147,8 @@ public class ExecutorConfig {
         this.apiPort = apiPort;
         this.jreLocation = jreLocation;
         this.executorLocation = executorLocation;
+        this.splunkLocation = splunkLocation;
+        this.splunkShLocation = splunkShLocation;
         this.cassandraLocation = cassandraLocation;
         this.libmesosLocation = libmesosLocation;
         this.cacheFetchedUris = cacheFetchedUris;
@@ -166,6 +180,14 @@ public class ExecutorConfig {
     @JsonIgnore
     public URI getExecutorLocation() {
         return executorLocation;
+    }
+    @JsonIgnore
+    public URI getSplunkLocation() {
+        return splunkLocation;
+    }
+    @JsonIgnore
+    public URI getSplunkShLocation() {
+        return splunkShLocation;
     }
 
     public int getHeapMb() {
@@ -199,6 +221,14 @@ public class ExecutorConfig {
     public String getExecutorLocationString() {
         return executorLocation.toString();
     }
+    @JsonProperty("splunk_location")
+    public String getSplunkLocationString() {
+        return splunkLocation.toString();
+    }
+    @JsonProperty("splunk_sh_location")
+    public String getSplunkShLocationString() {
+        return splunkShLocation.toString();
+    }
 
     @JsonProperty("cassandra_location")
     public String getCassandraLocationString() {
@@ -217,6 +247,8 @@ public class ExecutorConfig {
     public Set<String> getURIs() {
         Set<String> uris = new HashSet<String>();
         uris.add(executorLocation.toString());
+        uris.add(splunkLocation.toString());
+        uris.add(splunkShLocation.toString());
         uris.add(cassandraLocation.toString());
         uris.add(jreLocation.toString());
         uris.add(libmesosLocation.toString());
@@ -239,6 +271,10 @@ public class ExecutorConfig {
                 Objects.equals(getJreLocation(), that.getJreLocation()) &&
                 Objects.equals(getExecutorLocation(),
                         that.getExecutorLocation()) &&
+                Objects.equals(getSplunkLocation(),
+                        that.getSplunkLocation()) &&
+                Objects.equals(getSplunkShLocation(),
+                        that.getSplunkShLocation()) &&
                 Objects.equals(getCassandraLocation(),
                         that.getCassandraLocation()) &&
                 Objects.equals(getLibmesosLocation(),
@@ -250,7 +286,7 @@ public class ExecutorConfig {
     public int hashCode() {
         return Objects.hash(getCommand(), getArguments(), getCpus(),
                 getMemoryMb(), getHeapMb(), getApiPort(),
-                getJreLocation(), getExecutorLocation(), getCassandraLocation(), getLibmesosLocation(),
+                getJreLocation(), getExecutorLocation(),getSplunkLocation(),getSplunkShLocation(), getCassandraLocation(), getLibmesosLocation(),
                 getCacheFetchedURIs(), getJavaHome());
     }
 
