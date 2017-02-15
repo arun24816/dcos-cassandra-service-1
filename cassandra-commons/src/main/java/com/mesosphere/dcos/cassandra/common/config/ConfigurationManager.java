@@ -33,12 +33,14 @@ public class ConfigurationManager implements Managed {
                                                 String role,
                                                 String principal) throws ConfigStoreException {
         final ExecutorConfig executorConfig = getTargetConfig().getExecutorConfig();
-        return CassandraTaskExecutor.create(
-            frameworkId,
-            name,
-            role,
-            principal,
-            executorConfig);
+        CassandraTaskExecutor cte = CassandraTaskExecutor.create(
+                frameworkId,
+                name,
+                role,
+                principal,
+                executorConfig);
+        LOGGER.info("Arun this command is going to execute on executor: {} ",cte.getCommand());
+        return cte;
     }
 
     public CassandraDaemonTask createDaemon(String frameworkId,

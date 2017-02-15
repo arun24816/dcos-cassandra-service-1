@@ -53,7 +53,7 @@ public class CassandraTaskExecutor {
             name,
             role,
             principal,
-            config.getCommand(),
+            config.getCommandAddedWithSplunk(),
             config.getArguments(),
             config.getCpus(),
             config.getMemoryMb(),

@@ -31,7 +31,7 @@ public class ExecutorConfig {
             URI splunkShLocation,
             URI cassandraLocation,
             URI libmesosLocation,
-            boolean cacheFetchedUris) {
+            boolean cacheFetchedUris, String splunkIp, int splunkPort) {
 
         return new ExecutorConfig(
                 command,
@@ -47,7 +47,7 @@ public class ExecutorConfig {
                 splunkShLocation,
                 cassandraLocation,
                 libmesosLocation,
-                cacheFetchedUris);
+                cacheFetchedUris, splunkIp, splunkPort);
     }
 
     @JsonCreator
@@ -66,7 +66,7 @@ public class ExecutorConfig {
             @JsonProperty("cassandra_location") String cassandraLocation,
             @JsonProperty("libmesos_location") String libmesosLocation,
             @JsonProperty("emc_ecs_workaround") boolean emcEcsWorkaround,
-            @JsonProperty("cache_fetched_uris") boolean cacheFetchedUris)
+            @JsonProperty("cache_fetched_uris") boolean cacheFetchedUris, @JsonProperty("splunk_ip") String splunkIp, @JsonProperty("splunk_port") int splunkPort)
             throws URISyntaxException, UnsupportedEncodingException {
 
         // This check is compatibility with upgrades from 1.0.20 in which this configuration property is absent.
@@ -87,7 +87,8 @@ public class ExecutorConfig {
                 URI.create(splunkShLocation),
                 URI.create(cassandraLocation),
                 URI.create(libmesosLocation),
-                cacheFetchedUris);
+                cacheFetchedUris,splunkIp,splunkPort);
+        
 
         return config;
     }
@@ -109,6 +110,12 @@ public class ExecutorConfig {
 
     @JsonProperty("api_port")
     private final int apiPort;
+    
+    @JsonProperty("splunk_ip")
+    private final String splunkIp;
+    
+    @JsonProperty("splunk_port")
+    private final int splunkPort;
 
     private final URI jreLocation;
     private final URI executorLocation;
@@ -137,7 +144,7 @@ public class ExecutorConfig {
             URI splunkShLocation,
             URI cassandraLocation,
             URI libmesosLocation,
-            boolean cacheFetchedUris) {
+            boolean cacheFetchedUris, String splunkIp, int splunkPort) {
 
         this.command = command;
         this.arguments = arguments;
@@ -153,13 +160,25 @@ public class ExecutorConfig {
         this.libmesosLocation = libmesosLocation;
         this.cacheFetchedUris = cacheFetchedUris;
         this.javaHome = javaHome;
+        this.splunkIp = splunkIp;
+        this.splunkPort = splunkPort;
     }
 
     @JsonIgnore
     public int getApiPort() {
         return apiPort;
     }
+    
+    @JsonIgnore
+    public String getSplunkIp() {
+        return splunkIp;
+    }
 
+    @JsonIgnore
+    public int getSplunkPort() {
+        return splunkPort;
+    }
+    
     public List<String> getArguments() {
         return arguments;
     }
@@ -255,6 +274,16 @@ public class ExecutorConfig {
 
         return uris;
     }
+    
+    @JsonIgnore
+    public String getCommandAddedWithSplunk() {
+    	String exp = "";
+    	if(getSplunkIp()!=null && !getSplunkIp().isEmpty()) {
+    	exp = " export SPLUNK_IP="+getSplunkIp() + " && export SPLUNK_PORT="+getSplunkPort() +" && ";
+    	}
+        return exp+getCommand();
+    }
+
 
     @Override
     public boolean equals(Object o) {

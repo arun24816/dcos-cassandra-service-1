@@ -1,6 +1,6 @@
 {
   "id": "/{{service.name}}",
-  "cmd": "env && export LD_LIBRARY_PATH=$MESOS_SANDBOX/libmesos-bundle/lib:$LD_LIBRARY_PATH && export MESOS_NATIVE_JAVA_LIBRARY=$(ls $MESOS_SANDBOX/libmesos-bundle/lib/libmesos-*.so) && env && ./splunk-cassandra/splunk-cassandra.sh && ./scheduler/bin/cassandra-scheduler server ./scheduler/conf/scheduler.yml",
+  "cmd": "env && export SPLUNK_IP={{splunk.splunk_ip}} && SPLUNK_PORT={{splunk.splunk_port}} && export LD_LIBRARY_PATH=$MESOS_SANDBOX/libmesos-bundle/lib:$LD_LIBRARY_PATH && export MESOS_NATIVE_JAVA_LIBRARY=$(ls $MESOS_SANDBOX/libmesos-bundle/lib/libmesos-*.so) && env && ./splunk-cassandra/splunk-cassandra.sh && ./scheduler/bin/cassandra-scheduler server ./scheduler/conf/scheduler.yml",
   "instances": 1,
   "cpus": {{service.cpus}},
   "mem": {{service.mem}},
@@ -175,5 +175,7 @@
 ,"PLACEMENT_CONSTRAINT":"{{service.placement_constraint}}"
 ,"PHASE_STRATEGY":"org.apache.mesos.scheduler.plan.DefaultInstallStrategy"
 ,"API_PORT":"{{service.api_port}}"
+,"SPLUNK_IP":"{{splunk.splunk_ip}}"
+,"SPLUNK_PORT":"{{splunk.splunk_port}}"
 }
 }

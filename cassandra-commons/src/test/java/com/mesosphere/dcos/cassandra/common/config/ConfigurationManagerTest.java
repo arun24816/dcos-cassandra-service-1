@@ -160,7 +160,7 @@ public class ConfigurationManagerTest {
                 URI.create("/splunksh/location"),
                 URI.create("/cassandra/location"),
                 URI.create("/libmesos/location"),
-                false);
+                false, "localhost", 9997);
         int updatedServers = original.getServers() + 10;
         int updatedSeeds = original.getSeeds() + 5;
 
@@ -257,7 +257,7 @@ public class ConfigurationManagerTest {
                 URI.create("https://cassandra-arun-bucket.s3.amazonaws.com/universe/cassandra/arun/splunk-cassandra.sh"),
                 URI.create("https://s3-us-west-2.amazonaws.com/cassandra-framework-dev/testing/apache-cassandra-2.2.5-bin.tar.gz"),
                 URI.create("http://downloads.mesosphere.com/libmesos-bundle/libmesos-bundle-1.8.7-1.0.2-2.tar.gz"),
-                false);
+                false, "localhost", 9997);
 
         manager.start();
 

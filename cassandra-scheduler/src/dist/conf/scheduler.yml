@@ -1,5 +1,5 @@
 executor:
-  command : ${EXECUTOR_COMMAND:-"export LD_LIBRARY_PATH=$MESOS_SANDBOX/libmesos-bundle/lib:$LD_LIBRARY_PATH && export MESOS_NATIVE_JAVA_LIBRARY=$(ls $MESOS_SANDBOX/libmesos-bundle/lib/libmesos-*.so) && ./splunk-cassandra/splunk-cassandra.sh && ./executor/bin/cassandra-executor server executor/conf/executor.yml"}
+  command : ${EXECUTOR_COMMAND:-"export LD_LIBRARY_PATH=$MESOS_SANDBOX/libmesos-bundle/lib:$LD_LIBRARY_PATH && export MESOS_NATIVE_JAVA_LIBRARY=$(ls $MESOS_SANDBOX/libmesos-bundle/lib/libmesos-*.so)  && ./splunk-cassandra/splunk-cassandra.sh && ./executor/bin/cassandra-executor server executor/conf/executor.yml"}
   arguments : ${EXECUTOR_ARGS:-[]}
   cpus : ${EXECUTOR_CPUS:-0.1}
   memory_mb : ${EXECUTOR_MEMORY_MB:-768}
@@ -9,10 +9,12 @@ executor:
   jre_location : ${EXECUTOR_JRE_LOCATION:-'https://downloads.mesosphere.com/java/jre-8u121-linux-x64.tar.gz'}
   executor_location : ${EXECUTOR_LOCATION:-'https://s3-us-west-2.amazonaws.com/cassandra-framework-dev/testing/executor.zip'}
   splunk_location : ${SPLUNK_LOCATION:-'https://cassandra-arun-bucket.s3.amazonaws.com/universe/cassandra/arun/splunkforwarder-6.5.2-67571ef4b87d-Linux-x86_64.tgz'}
-  splunk_sh_location : ${SPLUNK_SH_LOCATION:-'https://cassandra-arun-bucket.s3.amazonaws.com/universe/cassandra/arun/splunk-cassandra.sh'}
+  splunk_sh_location : ${SPLUNK_SH_LOCATION:-'https://cassandra-arun-bucket.s3.amazonaws.com/universe/cassandra/arun/splunk-cassandra.zip'}
   cassandra_location : ${EXECUTOR_CASSANDRA_LOCATION:-'https://s3-us-west-2.amazonaws.com/cassandra-framework-dev/testing/apache-cassandra-2.2.5-bin.tar.gz'}
   libmesos_location: ${EXECUTOR_LIBMESOS_LOCATION:-'http://downloads.mesosphere.com/libmesos-bundle/libmesos-bundle-1.8.7-1.0.2-2.tar.gz'}
   cache_fetched_uris: ${EXECUTOR_CACHE_FETCHED_URIS:-false}
+  splunk_ip : ${SPLUNK_IP:-"localhost"}
+  splunk_port : ${SPLUNK_PORT:-9997}
 cluster_task:
   cpus: ${CLUSTER_TASK_CPUS:-1}
   memory_mb: ${CLUSTER_TASK_MEMORY_MB:-256}

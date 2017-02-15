@@ -605,6 +605,30 @@
 				"cpus",
 				"mem"
 			]
+		},
+		"splunk": {
+			"id": "http://cassandra/docs/mesosphere.com/splunk",
+			"type": "object",
+			"description": "The DC/OS Apache Cassandra service cluster task configuration object.",
+			"properties": {
+				"splunk_ip": {
+					"id": "http://cassandra/docs/mesosphere.com/splunk/splunk_ip",
+					"type": "string",
+					"description": "The cpu shares used by the Cassandra service cluster tasks.",
+					"default": "54.193.109.79"
+				},
+				"splunk_port": {
+					"id": "http://cassandra/docs/mesosphere.com/splunk/splunk_port",
+					"type": "integer",
+					"description": "The memory used by the Cassandra cluster tasks in Mb.",
+					"default": 9997
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"splunk_ip",
+				"splunk_port"
+			]
 		}
 	},
 	"additionalProperties": false,
@@ -613,6 +637,7 @@
 		"nodes",
 		"cassandra",
 		"executor",
-		"task"
+		"task",
+		"splunk"
 	]
 }
