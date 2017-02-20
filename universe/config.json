@@ -609,18 +609,18 @@
 		"splunk": {
 			"id": "http://cassandra/docs/mesosphere.com/splunk",
 			"type": "object",
-			"description": "The DC/OS Apache Cassandra service cluster task configuration object.",
+			"description": "Splunk Forward server which will take forward the logs to splunk server",
 			"properties": {
 				"splunk_ip": {
 					"id": "http://cassandra/docs/mesosphere.com/splunk/splunk_ip",
 					"type": "string",
-					"description": "The cpu shares used by the Cassandra service cluster tasks.",
-					"default": "54.193.109.79"
+					"description": "Splunk Server IP where logs will be send and shared",
+					"default": "localhost"
 				},
 				"splunk_port": {
 					"id": "http://cassandra/docs/mesosphere.com/splunk/splunk_port",
 					"type": "integer",
-					"description": "The memory used by the Cassandra cluster tasks in Mb.",
+					"description": "Splunk server port, make sure that splunk the listening on this port",
 					"default": 9997
 				}
 			},
