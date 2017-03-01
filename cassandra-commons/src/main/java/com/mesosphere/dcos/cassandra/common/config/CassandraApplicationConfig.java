@@ -116,6 +116,7 @@ public class CassandraApplicationConfig {
   public static final String REQUEST_SCHEDULER_KEY = "request_scheduler";
   public static final String SERVER_ENCRYPTION_OPTIONS_KEY = "server_encryption_options";
   public static final String CLIENT_ENCRYPTION_OPTIONS_KEY = "client_encryption_options";
+  public static final String TRANSPARENT_DATA_ENCRYPTION_OPTIONS_KEY = "transparent_data_encryption_options";
   public static final String INTERNODE_COMPRESSION_KEY = "internode_compression";
   public static final String INTER_DC_TCP_NODELAY_KEY = "inter_dc_tcp_nodelay";
   public static final String TRACETYPE_QUERY_TTL_KEY = "tracetype_query_ttl";
@@ -362,6 +363,25 @@ public class CassandraApplicationConfig {
       )
     );
   }
+  
+  public static Map<String, Object> createTrasparentDataEncryptionProvider() {
+	  
+	 
+	  
+	    return ImmutableMap.<String, Object>of(
+	    		  "enabled",true,
+	    		  "chunk_length_kb",64,
+	    		  "cipher","AES/CBC/PKCS5Padding",
+	    		  "key_alias","cass_node1",
+	    		  "key_provider",ImmutableList.<Map<String, Object>>of(ImmutableMap.of
+	    		            ("class_name", "com.mesosphere.dcos.cassandra.keyprovider.AdobekeyProvider", 
+	    		            		"parameters",ImmutableList.of(ImmutableMap.of
+	    		                    ("keystore", "conf/adobe.keystore",
+	    		                    "keystore_password", "john123",
+	    		                    "store_type", "JCEKS",
+	    		                    "key_password", "john123")))));
+	   
+	  }
 
   @JsonCreator
   public static CassandraApplicationConfig create(
@@ -1517,6 +1537,7 @@ public class CassandraApplicationConfig {
     map.put(COMMITLOG_SYNC_PERIOD_IN_MS_KEY, commitlogSyncPeriodInMs);
     map.put(COMMITLOG_SEGMENT_SIZE_IN_MB_KEY, commitlogSegmentSizeInMb);
     map.put(SEED_PROVIDER_KEY, createDcosSeedProvider(seedsUrl));
+    map.put(TRANSPARENT_DATA_ENCRYPTION_OPTIONS_KEY, createTrasparentDataEncryptionProvider());
     map.put(OTC_COALESCING_STRATEGY, otcCoalescingStrategy);
     map.put(CONCURRENT_READS_KEY, concurrentReads);
     map.put(CONCURRENT_WRITES_KEY, concurrentWrites);

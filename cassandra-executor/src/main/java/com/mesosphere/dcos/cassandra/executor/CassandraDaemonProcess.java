@@ -245,10 +245,11 @@ public class CassandraDaemonProcess extends ProcessTask {
 
     private static ProcessBuilder createDaemon(CassandraPaths cassandraPaths, CassandraDaemonTask cassandraDaemonTask, boolean metricsEnabled) throws UnknownHostException {
 
+    	LOGGER.info("Arun going to run cassandra with -R option");
         final ProcessBuilder builder = new ProcessBuilder(
             cassandraPaths.cassandraRun().toString(),
             getReplaceIp(cassandraDaemonTask),
-            "-f")
+            "-R")
             .inheritIO()
             .directory(new File(System.getProperty("user.dir")));
         builder.environment().put(
