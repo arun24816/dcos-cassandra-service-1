@@ -4,7 +4,7 @@
       "scheduler-zip":"{{artifact-dir}}/scheduler.zip",
       "executor-zip":"{{artifact-dir}}/executor.zip",
       "jre-tar-gz":"https://downloads.mesosphere.com/java/jre-8u121-linux-x64.tar.gz",
-      "apache-cassandra-bin-tar-gz":"https://s3-us-west-1.amazonaws.com/cassandra-arun-bucket/universe/cassandra/arun/apache-cassandra-3.9.zip",
+      "apache-cassandra-bin-tar-gz":"https://s3-us-west-1.amazonaws.com/cassandra-arun-bucket/universe/cassandra/arun/apache-cassandra-3.9-bin.tar.gz",
       "libmesos-bundle-tar-gz": "http://downloads.mesosphere.com/libmesos-bundle/libmesos-bundle-1.8.7-1.0.2-2.tar.gz",
       "splunk-tar": "{{artifact-dir}}/splunkforwarder-6.5.2-67571ef4b87d-Linux-x86_64.tgz",
       "splunk-sh": "{{artifact-dir}}/splunk-cassandra.zip"
