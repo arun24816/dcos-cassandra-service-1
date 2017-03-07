@@ -120,6 +120,6 @@ public class CassandraPaths {
      */
     public Path cassandraRun() {
 
-        return bin().resolve("cassandra");
+        return bin().resolve("cassandra -R");
     }
 }
